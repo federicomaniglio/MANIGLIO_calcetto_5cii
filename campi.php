@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'database.php';
 $title = $_GET['id_campo'];
 
@@ -48,6 +49,7 @@ if (!empty($_POST)) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<?php require_once 'navigation.php' ?>
 <h1><?= $title ?></h1>
 
 
@@ -79,14 +81,14 @@ if (!empty($_POST)) {
             <?php
             foreach ($utenti as $utente) {
                 ?>
-                <input type="radio" name="id_utente" value="<?= $utente['id'] ?>"> <?= $utente['nome'] ?>
+                <input type="radio" name="id_utente" value="<?= $utente['id'] ?>" required> <?= $utente['nome'] ?>
                 <br>
                 <?php
             }
             ?>
             <input type="hidden" name="id_campo" value="<?= $campo['nome_campo'] ?>">
             <label>
-                <input type="date" name="data">
+                <input type="date" name="data" required>
             </label>
             <input type="submit" value="Prenota">
         </form>

@@ -1,5 +1,6 @@
 <?php
 require_once 'database.php';
+session_start();
 $title = "Calcetto";
 
 $pdo = Database::getInstance()->getConnection();
@@ -27,6 +28,11 @@ $result = $pdo->query("SELECT * FROM campi ORDER BY  capienza DESC");
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<?php require_once 'navigation.php' ?>
+
+
+
 <h1><?= $title ?></h1>
 <?php
 foreach ($result as $row){
