@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once 'database.php';
+require_once 'send_mail.php';
+
 $errore = "";
+
 if(!empty($_POST)){
     $pdo = Database::getInstance()->getConnection();
     $stmt = $pdo->prepare("SELECT * FROM utenti WHERE username = :username");
@@ -10,6 +13,7 @@ if(!empty($_POST)){
 
     if($utente && password_verify($_POST['password'], $utente['password'])){
         $_SESSION['username'] = $utente['username'];
+        sendLoginMail($utente['username'] . "@gmaill.com", $utente['username']);
         header("Location: index.php");
         exit;
     } else{
